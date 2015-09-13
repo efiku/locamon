@@ -1,6 +1,5 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
@@ -14,14 +13,8 @@ class LocaMonContext implements Context, SnippetAcceptingContext
     /**
      * @var LocaMon
      */
-    private $locMonClass;
-    /**
-     * @var ArrayObject
-     */
+    private $locaMonClass;
     private $monthNumbers;
-    /**
-     * @var ArrayObject
-     */
     private $localizedMonths;
 
     /**
@@ -33,9 +26,9 @@ class LocaMonContext implements Context, SnippetAcceptingContext
      */
     public function __construct()
     {
-        $this->locMonClass = new LocaMon();
-        $this->monthNumbers = new ArrayObject();
-        $this->localizedMonths = new ArrayObject();
+        $this->locaMonClass = new LocaMon();
+        $this->monthNumbers = [];
+        $this->localizedMonths = [];
     }
 
     /**
@@ -43,8 +36,8 @@ class LocaMonContext implements Context, SnippetAcceptingContext
      */
     public function iHaveFewMonthNumbers(TableNode $table)
     {
-        foreach ($table->getHash() as $month) {
-            $this->monthNumbers->append($month);
+        foreach ($table->getHash() as $index => $month) {
+            $this->monthNumbers[] = $month;
         }
 
     }
@@ -54,7 +47,7 @@ class LocaMonContext implements Context, SnippetAcceptingContext
      */
     public function iCallMethodSetlocaleWithParameter($arg1)
     {
-        $this->locMonClass->setLocale($arg1);
+        $this->locaMonClass->setLocale($arg1);
     }
 
     /**
@@ -62,7 +55,7 @@ class LocaMonContext implements Context, SnippetAcceptingContext
      */
     public function callMethodSetformatWithParameter($arg1)
     {
-        $this->locMonClass->setFormat($arg1);
+        $this->locaMonClass->setFormat($arg1);
     }
 
     /**
@@ -70,9 +63,24 @@ class LocaMonContext implements Context, SnippetAcceptingContext
      */
     public function iCallMethodSetdataAndMyMonthNumberFromTableAsTimestamp()
     {
-        foreach($this->monthNumbers as $index => $monthNumbersArray){
-            print_r($monthNumbersArray);
+        foreach ($this->monthNumbers as $index => $monthNumbersArray) {
+            $timestamp = mktime(0, 0, 0, $monthNumbersArray["month_number"]);
+            $this->localizedMonths [] =
+                $this->locaMonClass->setData($timestamp)->getResult();
         }
     }
 
+
+    /**
+     * @Then I should get:
+     */
+    public function iShouldGet(TableNode $table)
+    {
+        foreach ($table->getHash() as $row) {
+            if (!in_array($row['localized_month'], $this->localizedMonths)) {
+                throw new Exception("Localized month did not match");
+            }
+        }
+
+    }
 }

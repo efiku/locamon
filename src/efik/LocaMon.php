@@ -8,7 +8,7 @@ class LocaMon
     private $format;
     private $timestamp;
 
-    public function __construct($argument1)
+    public function __construct()
     {
         $this->locale = null;
         $this->format = null;
@@ -17,7 +17,7 @@ class LocaMon
 
     public function setLocale($argument1)
     {
-       $this->locale = $argument1;
+        $this->locale = $argument1;
         return $this;
     }
 
@@ -29,14 +29,14 @@ class LocaMon
 
     public function setData($argument1)
     {
-        $this->timestamp = (int) $argument1;
+        $this->timestamp = (int)$argument1;
         return $this;
     }
 
     public function getResult()
     {
-        $dateFormatter = new \IntlDateFormatter($this->locale,\IntlDateFormatter::FULL,\IntlDateFormatter::FULL);
+        $dateFormatter = new \IntlDateFormatter($this->locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL);
         $dateFormatter->setPattern($this->format);
-        $dateFormatter->format($this->timestamp);
+        return $dateFormatter->format($this->timestamp);
     }
 }
