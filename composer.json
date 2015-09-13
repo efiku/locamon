@@ -4,13 +4,12 @@
     "type": "Project",
     "require": {
         "ext-intl": "^1.1",
-        "php": ">= 5.6",
-        "phpunit/phpunit": "^5.1@dev",
-        "coduo/phpspec-data-provider-extension": "^1.0@dev"
+        "php": ">= 5.6"
     },
     "require-dev": {
         "behat/behat": "^3.0@dev",
-        "phpspec/phpspec": "^2.2@dev"
+        "phpspec/phpspec": "^2.2@dev",
+        "coduo/phpspec-data-provider-extension": "^1.0@dev"
     },
     "license": "MIT",
     "authors": [
@@ -19,7 +18,7 @@
             "email": "pazdurk@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "config": {
         "bin-dir": "bin/"
     },
