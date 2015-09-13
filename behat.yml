@@ -1,0 +1,7 @@
+# behat.yml
+
+default:
+    suites:
+        LocaMon_features:
+            paths:    [ %paths.base%/features/LocaMon ]
+            contexts: [ LocaMonContext ]
