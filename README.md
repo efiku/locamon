@@ -1,5 +1,5 @@
 # LocaMon project
-[![Build Status](https://magnum.travis-ci.com/efiku/locamon.svg?token=xCpwqAxDjMzyxjCPykfo&branch=master)](https://magnum.travis-ci.com/efiku/locamon)
+[![Build Status](https://travis-ci.com/efiku/locamon.svg?branch=master)](https://travis-ci.com/efiku/locamon)
 
 LocaMon is class which allow you to simple convert time into localized names.
 For example month numbers into names.
