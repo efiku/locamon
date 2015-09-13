@@ -1,5 +1,5 @@
 {
-    "name": "efik/locamon",
+    "name": "efiku/locamon",
     "description": "Simple class allow you to localize month names and other",
     "type": "Project",
     "require": {
