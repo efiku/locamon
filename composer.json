@@ -4,7 +4,7 @@
     "type": "Project",
     "require": {
         "ext-intl": "^1.1",
-        "php": ">= 5.6"
+        "php": ">= 5.5"
     },
     "require-dev": {
         "behat/behat": "^3.0@dev",
